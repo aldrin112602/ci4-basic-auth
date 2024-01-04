@@ -50,6 +50,7 @@ class LoginController extends BaseController
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($ses_data);
+                $session->setFlashdata('msg', 'Signed in successfully');
                 return redirect()->to('/profile');
             
             }else{
