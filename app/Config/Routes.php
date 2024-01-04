@@ -16,3 +16,4 @@ $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::l
 $routes->get('/login', 'LoginController::index');
 $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 $routes->get('/dashboard', 'ProfileController::dashboard',['filter' => 'authGuard']);
+$routes->post('/logout', 'ProfileController::logout');

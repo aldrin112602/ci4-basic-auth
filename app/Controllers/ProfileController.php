@@ -23,4 +23,19 @@ class ProfileController extends BaseController
             . view('user/dashboard', $data) 
             . view('templates/footer');
     }
+
+    public function logout()
+    {
+        $session = session();
+        
+        if ($session->get('isLoggedIn')) {
+            $session->destroy();
+            $session->setFlashdata('msg', 'Logout successfully');
+        } else {
+            $session->setFlashdata('msg', 'You are not logged in.');
+        }
+
+        return redirect()->to('/login');
+    }
+
 }
