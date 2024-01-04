@@ -6,5 +6,5 @@ use App\Controllers\AuthController;
 /**
  * @var RouteCollection $routes
  */
-// $routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index');
 $routes->get('(:segment)', [AuthController::class, 'view']);
