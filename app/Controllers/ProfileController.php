@@ -9,7 +9,18 @@ class ProfileController extends BaseController
 {
     public function index()
     {
-        $session = session();
-        echo "Hello : ".$session->get('fullname');
+        $data['title'] = "Profile";
+        echo  view('templates/header', $data) 
+            . view('user/profile', $data) 
+            . view('templates/footer');
+    }
+
+
+    public function dashboard()
+    {
+        $data['title'] = "Dashboard";
+        echo  view('templates/header', $data) 
+            . view('user/dashboard', $data) 
+            . view('templates/footer');
     }
 }

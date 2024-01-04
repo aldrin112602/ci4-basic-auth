@@ -17,6 +17,8 @@
 
     body {
         background: linear-gradient(45deg, #65B741, #C1F2B0, white);
+        background-repeat: no-repeat;
+        min-height: 100vh;
     }
     </style>
 </head>
@@ -38,17 +40,33 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 gap-lg-4">
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/register">Register</a>
-                    </li>
-                </ul>
+                <?php if (!session()->get('isLoggedIn')): ?>
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-lg-4">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/register">Register</a>
+                        </li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-lg-4">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                <?php endif; ?>
+
+
             </div>
         </div>
     </nav>

@@ -10,6 +10,12 @@ class LoginController extends BaseController
 {
     public function index()
     {
+        $session = session();
+        if ($session->get('isLoggedIn'))
+        {
+            return redirect()
+                ->to('/dashboard');
+        }
         helper(['form']);
         $data['title'] = "Login";
         echo  view('templates/header', $data) 
