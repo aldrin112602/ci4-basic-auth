@@ -21,5 +21,11 @@
         <div class="d-grid mt-3">
             <button class="btn btn-block btn-sm fw-bold col-5 mx-auto" style="height: 45px; border-radius: 18px;letter-spacing: 2px; background: #1B4242; color: #DCF2F1">Log-in</button>
         </div>
+
+        <div class="mt-3">
+            <p class="text-center">
+                Don't have an account? <a href="/register">Register</a>
+            </p>
+        </div>
     </form>
 </div>

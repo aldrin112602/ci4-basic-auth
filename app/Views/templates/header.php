@@ -18,7 +18,7 @@
     }
 
     body {
-        background: linear-gradient(45deg, #65B741, #C1F2B0, white);
+        background: linear-gradient(45deg, #FFF5E0, #fefefe);
         background-repeat: no-repeat;
         min-height: 100vh;
     }
@@ -27,7 +27,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md  bg-light p-4">
+    <nav class="navbar navbar-expand-md  bg-white border-bottom p-4">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <svg role="img" aria-label="Visit CodeIgniter.com official website!" xmlns="http://www.w3.org/2000/svg"
