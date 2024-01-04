@@ -34,6 +34,10 @@ class CreateUsersTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
+            'created_at' => [ // Added 'created_at' column
+                'type' => 'TIMESTAMP',
+                'defaultExpression' => 'CURRENT_TIMESTAMP',
+            ],
         ]);
 
         // Define primary key
