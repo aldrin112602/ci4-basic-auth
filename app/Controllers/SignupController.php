@@ -13,6 +13,10 @@ class SignupController extends Controller
         {
             return redirect()
                 ->to('/dashboard');
+        } elseif ($session->get('OTP_TOKEN')) {
+            $session->setFlashdata('msg', 'Please verify your email first!');
+            return redirect()->to('/verify');
+        
         }
         
         helper(['form']);
@@ -45,17 +49,17 @@ class SignupController extends Controller
             $OTP_TOKEN = rand(100000, 999999);
             $subject = "Email verification";
             $message = '
-                    <!DOCTYPE html>
-                    <html>
-                        <body>
-                            <p>Dear '. $to .',</p>
-                            <p>Please verify your account. If you did not initiate this request, please ignore this email, please enter the following verification code:</p>
-                            <h2 style="text-align:center; font-size:32px;">'. $OTP_TOKEN .'</h2>
-                            <p>This code is valid for <b>10 minutes</b>, so please enter it as soon as possible.</p>
-                            <p>If you have any trouble entering the code, please don\'t hesitate to contact us at <a href="mailto:cabaleroaldrin02@gmail.com">cabaleroaldrin02@gmail.com</a>.</p>
-                        </body>
-                    </html>';
-            
+            <!DOCTYPE html>
+            <html>
+            <body>
+                <p>Dear '. $to .',</p>
+                <p>We have sent a 6-digit verification code to your Gmail address. Please use the code below to complete your registration:</p>
+                <h2 style="text-align:center; font-size:32px;">'. $OTP_TOKEN .'</h2>
+                <p>This code is valid for <b>10 minutes</b>. Please enter it on the registration page as soon as possible.</p>
+                <p>If you did not initiate this request, you can safely ignore this email.</p>
+                <p>If you encounter any issues or have questions, feel free to contact us at <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+            </body>
+            </html>';
 
             if (!$this->sendMail($to, $subject, $message)) {
                 $data['title'] = "Register User";
@@ -64,15 +68,15 @@ class SignupController extends Controller
                     . view('templates/footer');
             } else {
                 $session->set('OTP_TOKEN', $OTP_TOKEN);
-                return redirect->to('/verify');
-                // $userModel = new UserModel();
-                // $data = [
-                //     'email'    => $this->request->getVar('email'),
-                //     'username' => $this->request->getVar('username'),
-                //     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-                // ];
-                // $userModel->save($data);
-                // return redirect()->to('/login');
+                $ses_data = [
+                        'OTP_TOKEN' => $OTP_TOKEN,
+                        'email'    => $this->request->getVar('email'),
+                        'username'     => $this->request->getVar('username'),
+                        'email'    => $this->request->getVar('email'),
+                        'password'     => $this->request->getVar('password'),
+                ];
+                $session->set($ses_data);
+                return redirect()->to('/verify');
             }
         } else {
             $validation['validation'] = $this->validator;
@@ -81,6 +85,7 @@ class SignupController extends Controller
                 . view('auth/register', $validation)
                 . view('templates/footer');
         }
+
 
           
     }
@@ -109,11 +114,40 @@ class SignupController extends Controller
 
 
 
-    public function verify() {
+    public function verify() 
+    {
+        $session = session();
+        if(!$session->get('OTP_TOKEN')) 
+        {
+            return redirect()->to('/register');
+        }
+
+        
         $data['title'] = "Email Verification";
         echo view('templates/header', $data)
             . view('auth/verify')
             . view('templates/footer');
+    }
+
+    public function verifyMail() 
+    {
+        $session = session();
+        $OTP = $this->request->getVar('otp');
+        if($session->get('OTP_TOKEN') == $OTP) {
+            $userModel = new UserModel();
+            $data = [
+                'email'    => $session->get('email'),
+                'username' => $session->get('username'),
+                'password' => password_hash($session->get('password'), PASSWORD_DEFAULT)
+            ];
+            $userModel->save($data);
+            $session->destroy();
+            $session->setFlashdata('msg', 'Please login your account');
+            return redirect()->to('/login');
+        } else {
+            $session->setFlashdata('msg', 'Invalid OTP, please try again');
+            return redirect()->to('/verify');
+        }
     }
 
 

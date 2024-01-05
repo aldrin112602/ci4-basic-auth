@@ -8,6 +8,8 @@
             </div>
         <?php endif;?>
 
+        
+
         <div class="my-1">
             <label class="form-label fw-bold">Enter 6 digit code: </label>
             <input value="<?= session()->getFlashdata('data')['otp'] ?? null ?>" required type="number" name="otp" class="form-control form-control-sm border border-1" style="height: 45px; border-radius: 18px; padding: 0 30px;">

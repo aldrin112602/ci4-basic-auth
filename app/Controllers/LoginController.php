@@ -15,6 +15,10 @@ class LoginController extends BaseController
         {
             return redirect()
                 ->to('/dashboard');
+        } elseif ($session->get('OTP_TOKEN')) {
+            $session->setFlashdata('msg', 'Please verify your email first!');
+            return redirect()->to('/verify');
+        
         }
         helper(['form']);
         $data['title'] = "Login";

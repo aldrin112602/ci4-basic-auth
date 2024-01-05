@@ -12,8 +12,12 @@ $routes->get('/', 'SignupController::index');
 $routes->get('/register', 'SignupController::index');
 $routes->match(['get', 'post'], 'SignupController/store', 'SignupController::store');
 $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::loginAuth');
+
 $routes->get('/login', 'LoginController::index');
 $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 $routes->get('/dashboard', 'ProfileController::dashboard',['filter' => 'authGuard']);
 $routes->post('/logout', 'ProfileController::logout');
-$routes->post('/verify', 'SignupController::verify');
+$routes->get('/verify', 'SignupController::verify');
+
+
+$routes->post('SignupController/verifyMail', 'SignupController::verifyMail');
