@@ -8,7 +8,9 @@
             </div>
         <?php endif;?>
 
-        
+        <div class="text-muted text-center">
+            <small>We have sent a 6-digit verification code to your Gmail account.</small>
+        </div>
 
         <div class="my-1">
             <label class="form-label fw-bold">Enter 6 digit code: </label>

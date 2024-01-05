@@ -67,12 +67,11 @@ class SignupController extends Controller
                     . view('auth/register')
                     . view('templates/footer');
             } else {
-                $session->set('OTP_TOKEN', $OTP_TOKEN);
+                
                 $ses_data = [
                         'OTP_TOKEN' => $OTP_TOKEN,
                         'email'    => $this->request->getVar('email'),
                         'username'     => $this->request->getVar('username'),
-                        'email'    => $this->request->getVar('email'),
                         'password'     => $this->request->getVar('password'),
                 ];
                 $session->set($ses_data);
