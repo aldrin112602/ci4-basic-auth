@@ -45,7 +45,7 @@ class LoginController extends BaseController
             if($authenticatePassword){
                 $ses_data = [
                     'id' => $data['id'],
-                    'fullname' => $data['fullname'],
+                    'username' => $data['username'],
                     'email' => $data['email'],
                     'isLoggedIn' => TRUE
                 ];
