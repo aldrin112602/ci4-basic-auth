@@ -1,6 +1,5 @@
 <?php
 
-use App\Controllers\AuthController;
 use App\Controllers\LoginController;
 use App\Controllers\SignupController;
 use App\Controllers\ProfileController;
@@ -17,3 +16,4 @@ $routes->get('/login', 'LoginController::index');
 $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 $routes->get('/dashboard', 'ProfileController::dashboard',['filter' => 'authGuard']);
 $routes->post('/logout', 'ProfileController::logout');
+$routes->post('/verify', 'SignupController::verify');
