@@ -4,6 +4,12 @@
         style="border-radius: 70px; color: #092635;">
         <h4 class="fw-bold py-3 text-success">Register</h4>
 
+        <?php if(session()->getFlashdata('msg')):?>
+            <div class="alert alert-warning">
+                <?= session()->getFlashdata('msg') ?>
+            </div>
+        <?php endif;?>
+
         <?php if(isset($validation)):?>
         <div class="alert alert-warning fs-6">
             <?= $validation->listErrors() ?>

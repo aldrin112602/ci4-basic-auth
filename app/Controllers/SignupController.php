@@ -63,6 +63,7 @@ class SignupController extends Controller
 
             if (!$this->sendMail($to, $subject, $message)) {
                 $data['title'] = "Register User";
+                $session->setFlashdata('msg', 'Please check your internet connection');
                 echo view('templates/header', $data)
                     . view('auth/register')
                     . view('templates/footer');

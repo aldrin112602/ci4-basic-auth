@@ -34,7 +34,11 @@ class CreateUsersTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'created_at' => [ // Added 'created_at' column
+            'role' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255'
+            ],
+            'created_at' => [
                 'type' => 'TIMESTAMP',
                 'defaultExpression' => 'CURRENT_TIMESTAMP',
             ],
